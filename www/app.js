@@ -8,7 +8,7 @@ angular
   .module('app', [
     'ionic', 
     'app.controllers', 
-    'app.meerp', 
+    'app.meerp',
     ])
 
   .run(function($ionicPlatform) {

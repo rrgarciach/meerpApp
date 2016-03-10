@@ -36,16 +36,6 @@ angular
           }
         }
       })
-      .state('app.sales', {
-      url: '/sales/new',
-      // abstract: true,
-      views: {
-        'menuContent': {
-          templateUrl: 'meerp/sales/new-sale.html',
-          controller: 'NewSaleCtrl'
-        }
-      }
-    })
 
     .state('app.single', {
       url: '/playlists/:playlistId',
