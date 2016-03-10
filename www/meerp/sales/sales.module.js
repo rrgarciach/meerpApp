@@ -1,2 +1,4 @@
 angular
-  .module('app.meerp.sales', []);
+  .module('app.meerp.sales', [
+    'app.meerp.clients',
+  ]);
