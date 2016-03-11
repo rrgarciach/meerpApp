@@ -10,17 +10,8 @@
           url: '/sales/new',
           views: {
             'menuContent': {
-              templateUrl: '/meerp/sales/new-sale.html',
+              templateUrl: '/app/meerp/sales/new-sale/new-sale.html',
               controller: 'NewSaleCtrl as vm',
-            }
-          }
-        })
-        .state('app.sales:new:locate', {
-          url: '/sales/new/locate',
-          views: {
-            'menuContent': {
-              templateUrl: '/meerp/sales/locate-client.html',
-              controller: 'LocateClientCtrl as vm',
             }
           }
         });

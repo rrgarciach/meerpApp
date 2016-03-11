@@ -3,15 +3,14 @@
 
   angular
     .module('app.meerp.sales')
-    .controller('NewSaleCtrl', ['$location', NewSaleCtrl])
+    .controller('NewSaleOnSiteCtrl', ['$location', NewSaleOnSiteCtrl])
 
-  function NewSaleCtrl($location) {
+  function NewSaleOnSiteCtrl($location) {
     var vm = this;
     vm.locateClient = locateClient;
 
     function locateClient() {
-      console.log('dasdas');
-      $location.path('app/sales/new/locate');
+      $location.path('app/clients/locate');
     }
   }
 

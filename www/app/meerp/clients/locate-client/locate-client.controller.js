@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.meerp.sales')
+    .module('app.meerp.clients')
     .controller('LocateClientCtrl', ['$scope', '$ionicPopup', 'clientsService', LocateClientCtrl]);
 
   function LocateClientCtrl($scope, $ionicPopup, clientsService) {
@@ -36,7 +36,7 @@
       var currentPosition = new google.maps.Marker({
         position: map.getCenter(),
         map: map,
-        icon: 'http://maps.google.com/mapfiles/kml/pal4/icon49.png'
+        icon: 'http://maps.google.com/mapfiles/kml/pal4/icon57.png'
       });
 
       currentPosition.setMap(map);
@@ -50,7 +50,7 @@
 
       // An elaborate, custom popup
       var myPopup = $ionicPopup.show({
-        templateUrl: '/meerp/sales/locate-client-popup.html',
+        templateUrl: '/meerp/clients/locate-client/locate-clientr-popup.html',
         title: 'Juan Doe',
         subTitle: 'Cliente mayorista',
         scope: $scope,
