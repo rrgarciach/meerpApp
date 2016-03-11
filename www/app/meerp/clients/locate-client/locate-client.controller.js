@@ -79,7 +79,6 @@
     function init() {
       initMap();
 
-
     }
   }
 

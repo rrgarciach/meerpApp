@@ -6,7 +6,7 @@ angular
       .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'app/templates/menu.html',
+      templateUrl: 'app/core/menu.html',
       controller: 'AppCtrl'
     })
 
@@ -41,11 +41,11 @@ angular
       url: '/playlists/:playlistId',
       views: {
         'menuContent': {
-          templateUrl: 'app/templates/playlist.html',
+          templateUrl: 'app/core/playlist.html',
           controller: 'PlaylistCtrl'
         }
       }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('/app/sales/new/onsite');
   });
