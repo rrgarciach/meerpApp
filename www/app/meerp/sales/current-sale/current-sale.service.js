@@ -9,10 +9,10 @@
     var sale = {};
 
     return {
-      hasClient: hasClient
+      getClient: getClient
     };
 
-    function hasClient() {
+    function getClient() {
       return sale.client !== undefined;
     }
 

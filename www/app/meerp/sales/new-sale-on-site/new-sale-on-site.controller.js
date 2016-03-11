@@ -11,8 +11,10 @@
     init(); // Initialize controller
 
     function init() {
+      vm.sale = {};
+      vm.sale.client = currentSaleService.getClient();
       // Check if current sale has not a client selected yet
-      if (!currentSaleService.hasClient()) {
+      if (!vm.sale.client) {
         // Redirect to locate a client using map
         $location.path('app/clients/locate');
         showAlert();

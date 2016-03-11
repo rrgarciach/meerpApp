@@ -27,32 +27,31 @@
       vm.data = {};
 
       // An elaborate, custom popup
-      var myPopup = $ionicPopup.show({
-        templateUrl: '/app/meerp/clients/locate-client/client-profile-popup.html',
-        title: 'Cliente',
-        //subTitle: 'Cliente mayorista',
-        scope: $scope,
-        buttons: [
-          {text: 'Cancelar'},
-          {
-            text: '<b>Aceptar</b>',
-            type: 'button-positive',
-            onTap: function (e) {
-              e.preventDefault();
-              return $scope;
+      $ionicPopup.show({
+          templateUrl: '/app/meerp/clients/locate-client/client-profile-popup.html',
+          title: 'Cliente',
+          //subTitle: 'Cliente mayorista',
+          scope: $scope,
+          buttons: [
+            {text: 'Cancelar'},
+            {
+              text: '<b>Aceptar</b>',
+              type: 'button-positive',
+              onTap: function (e) {
+                e.preventDefault();
+                return $scope;
+              }
             }
-          }
-        ]
-      });
-
-      myPopup.then(function (res) {
-        console.log('Tapped!', res);
-      });
+          ]
+        })
+        .then(function (res) {
+          console.log('Tapped!', res);
+        });
 
       //$timeout(function () {
       //  myPopup.close(); //close the popup after 3 seconds for some reason
       //}, 3000);
-    };
+    }
 
     function init() {
       initMap();
