@@ -1,19 +1,22 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var bower = require('bower');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var sh = require('shelljs');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const bower = require('bower');
+const concat = require('gulp-concat');
+const sass = require('gulp-sass');
+const minifyCss = require('gulp-minify-css');
+const rename = require('gulp-rename');
+const sh = require('shelljs');
+const inject = require('gulp-inject');
 
-var paths = {
-  sass: ['./scss/**/*.scss']
+const paths = {
+  css: ['./www/assets/css/*.min.css'],
+  javascript: ['./www/app/**/*.js'],
+  sass: ['./scss/**/*.scss'],
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'injector']);
 
-gulp.task('sass', function(done) {
+gulp.task('sass', done => {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
     .on('error', sass.logError)
@@ -26,18 +29,18 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+gulp.task('watch', () => {
+  gulp.watch(paths.sass, ['sass', 'injector']);
 });
 
-gulp.task('install', ['git-check'], function() {
+gulp.task('install', ['git-check'], () => {
   return bower.commands.install()
-    .on('log', function(data) {
+    .on('log', data => {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
 });
 
-gulp.task('git-check', function(done) {
+gulp.task('git-check', done => {
   if (!sh.which('git')) {
     console.log(
       '  ' + gutil.colors.red('Git is not installed.'),
@@ -48,4 +51,12 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+gulp.task('injector', () => {
+  return gulp.src('./www/index.html')
+    .pipe(inject(gulp.src(paths.css, {read: false}), {relative: true}))
+    .pipe(gulp.dest('./www'))
+    .pipe(inject(gulp.src(paths.javascript, {read: false}), {relative: true}))
+    .pipe(gulp.dest('./www'));
 });
