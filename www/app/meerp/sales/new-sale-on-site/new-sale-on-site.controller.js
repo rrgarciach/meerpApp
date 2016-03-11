@@ -3,46 +3,27 @@
 
   angular
     .module('app.meerp.sales')
-    .controller('NewSaleOnSiteCtrl', ['$scope', '$ionicModal', NewSaleOnSiteCtrl])
+    .controller('NewSaleOnSiteCtrl', ['$location', '$ionicPopup', 'currentSaleService', NewSaleOnSiteCtrl])
 
-  function NewSaleOnSiteCtrl($scope, $ionicModal) {
+  function NewSaleOnSiteCtrl($location, $ionicPopup, currentSaleService) {
     var vm = this;
-    vm.openModal = openModal;
-    vm.closeModal = closeModal;
 
     init(); // Initialize controller
 
-    // Open modal
-    function openModal() {
-      vm.modal.show();
-    }
-    // Close modal
-    function closeModal() {
-      vm.modal.hide();
-    }
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function () {
-      vm.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function () {
-      // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function () {
-      // Execute action
-    });
-
     function init() {
-      // Setup modal with map to locate client
-      $ionicModal.fromTemplateUrl('app/meerp/clients/locate-client/locate-client-modal.html', {
-          scope: $scope,
-          animation: 'slide-in-up',
-        })
-        .then(function (modal) {
-          vm.modal = modal;
-          vm.modal.show();
-        });
+      // Check if current sale has not a client selected yet
+      if (!currentSaleService.hasClient()) {
+        // Redirect to locate a client using map
+        $location.path('app/clients/locate');
+        showAlert();
+      }
+    }
+
+    function showAlert() {
+      $ionicPopup.alert({
+        title: 'Nueva Venta in situ',
+        template: 'Seleccione el cliente al cual visita.'
+      });
     }
 
   }

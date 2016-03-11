@@ -3,46 +3,24 @@
 
   angular
     .module('app.meerp.clients')
-    .controller('LocateClientCtrl', ['$scope', '$ionicPopup', 'clientsService', LocateClientCtrl]);
+    .controller('LocateClientCtrl',
+      [
+        '$scope',
+        '$ionicPopup',
+        'mapsService',
+        'clientsService',
+        LocateClientCtrl
+      ]);
 
-  function LocateClientCtrl($scope, $ionicPopup, clientsService) {
+  function LocateClientCtrl($scope, $ionicPopup, mapsService, clientsService) {
     var vm = this;
 
     init();
 
     function initMap() {
-      var myLatlng = new google.maps.LatLng(28.6625306, -106.1033493);
-
-      var mapOptions = {
-        center: myLatlng,
-        zoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-
-      var map = new google.maps.Map(document.getElementById("map"),
-        mapOptions);
-
-      var client = clientsService.getClientByLocation();
-      var marker = new google.maps.Marker({
-        position: client.position,
-        map: map,
-        title: client.name,
-      });
-
-      google.maps.event.addListener(marker, 'click', function () {
-        showPopup();
-      });
-
-      var currentPosition = new google.maps.Marker({
-        position: map.getCenter(),
-        map: map,
-        icon: 'http://maps.google.com/mapfiles/kml/pal4/icon57.png'
-      });
-
-      currentPosition.setMap(map);
-      marker.setMap(map);
-
-      vm.map = map;
+      var map = mapsService.initMap( document.getElementById('map') );
+      var clientLocation = clientsService.getClientByLocation();
+      mapsService.addMarker(map, clientLocation, showPopup);
     }
 
     function showPopup() {
@@ -50,9 +28,9 @@
 
       // An elaborate, custom popup
       var myPopup = $ionicPopup.show({
-        templateUrl: '/meerp/clients/locate-client/locate-clientr-popup.html',
-        title: 'Juan Doe',
-        subTitle: 'Cliente mayorista',
+        templateUrl: '/app/meerp/clients/locate-client/client-profile-popup.html',
+        title: 'Cliente',
+        //subTitle: 'Cliente mayorista',
         scope: $scope,
         buttons: [
           {text: 'Cancelar'},
@@ -60,8 +38,8 @@
             text: '<b>Aceptar</b>',
             type: 'button-positive',
             onTap: function (e) {
-                e.preventDefault();
-                return $scope;
+              e.preventDefault();
+              return $scope;
             }
           }
         ]

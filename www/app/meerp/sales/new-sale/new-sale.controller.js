@@ -10,7 +10,6 @@
     vm.locateClient = locateClient;
 
     function locateClient() {
-      console.log('dasdas');
       $location.path('app/clients/locate');
     }
   }
