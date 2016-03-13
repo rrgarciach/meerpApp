@@ -18,21 +18,28 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <!-- your app's js -->
-    <script src="app.module.js"></script>
-    <script src="app.router.js"></script>
-    <script src="app.run.js"></script>
-    <script src="controllers.js"></script>
-
-    <script src="meerp/meerp.module.js"></script>
-    <!--clients module-->
-    <script src="meerp/clients/clients.module.js"></script>
-    <script src="meerp/clients/clients.service.js"></script>
-    <!--sales module-->
-    <script src="meerp/sales/sales.module.js"></script>
-    <script src="meerp/sales/sales.router.js"></script>
-    <script src="meerp/sales/new-sale.controller.js"></script>
-    <script src="meerp/sales/locate-client.controller.js"></script>
+    <!-- Your app's js : gulp index task will inject a new reference for new js file when run a new build -->
+    <!-- inject:js -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.router.js"></script>
+    <script src="app/app.run.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/meerp/meerp.module.js"></script>
+    <script src="app/meerp/clients/clients.module.js"></script>
+    <script src="app/meerp/clients/clients.router.js"></script>
+    <script src="app/meerp/clients/clients.service.js"></script>
+    <script src="app/meerp/products/products.module.js"></script>
+    <script src="app/meerp/products/products.service.js"></script>
+    <script src="app/meerp/sales/sales.module.js"></script>
+    <script src="app/meerp/sales/sales.router.js"></script>
+    <script src="app/meerp/services/services.module.js"></script>
+    <script src="app/core/directives/focus/focus.directive.js"></script>
+    <script src="app/meerp/clients/locate-client/locate-client.controller.js"></script>
+    <script src="app/meerp/sales/current-sale/current-sale.service.js"></script>
+    <script src="app/meerp/sales/new-sale/new-sale.controller.js"></script>
+    <script src="app/meerp/sales/new-sale-on-site/new-sale-on-site.controller.js"></script>
+    <script src="app/meerp/services/maps/maps.service.js"></script>
+    <!-- endinject -->
 
     <!-- google maps javascript -->
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true"></script>
