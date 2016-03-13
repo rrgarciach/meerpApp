@@ -3,9 +3,18 @@
 
   angular
     .module('app.meerp.sales')
-    .controller('NewSaleOnSiteCtrl', ['$location', '$ionicPopup', 'currentSaleService', NewSaleOnSiteCtrl])
+    .controller('NewSaleOnSiteCtrl', [
+      '$location',
+      '$ionicPopup',
+      'currentSaleService',
+      'productsService',
+      NewSaleOnSiteCtrl
+    ]);
 
-  function NewSaleOnSiteCtrl($location, $ionicPopup, currentSaleService) {
+  function NewSaleOnSiteCtrl($location,
+                             $ionicPopup,
+                             currentSaleService,
+                             productsService) {
     var vm = this;
 
     vm.captureProduct = captureProduct;
@@ -13,7 +22,15 @@
     init(); // Initialize controller
 
     function captureProduct() {
-
+      productsService.getProductsBySKU(vm.productCode)
+        .then(function (product) {
+          currentSaleService.setProduct(product);
+          vm.sale.products = currentSaleService.getProducts();
+          vm.productCode = '';
+        })
+        .catch(function (err) {
+          // Catch error
+        });
     }
 
     /**
@@ -35,8 +52,8 @@
       // Check if current sale has not a client selected yet
       if (!vm.sale.client) {
         // Redirect to locate a client using map
-        //$location.path('app/clients/locate');
-        //showAlert();
+        $location.path('app/clients/locate');
+        showAlert();
       }
     }
 

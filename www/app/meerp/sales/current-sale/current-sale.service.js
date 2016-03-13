@@ -6,11 +6,15 @@
     .service('currentSaleService', [currentSaleService]);
 
   function currentSaleService() {
-    var sale = {};
+    var sale = {
+      products: []
+    };
 
     return {
       getClient: getClient,
       setClient: setClient,
+      setProduct: setProduct,
+      getProducts: getProducts,
     };
 
     /**
@@ -27,6 +31,22 @@
      */
     function getClient() {
       return sale.client;
+    }
+
+    /**
+     * Sets a product into current sale
+     * @param product: object
+     */
+    function setProduct(product) {
+      sale.products.push(product);
+    }
+
+    /**
+     * Retrieves all products from current sale
+     * @returns {Array[product]}
+     */
+    function getProducts() {
+      return sale.products;
     }
 
   }

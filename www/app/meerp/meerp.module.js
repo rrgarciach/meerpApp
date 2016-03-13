@@ -5,6 +5,7 @@
     .module('app.meerp', [
       'ionic',
       'app.meerp.clients',
+      'app.meerp.products',
       'app.meerp.sales',
       'app.meerp.services',
     ]);

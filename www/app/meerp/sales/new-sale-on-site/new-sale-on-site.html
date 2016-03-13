@@ -18,11 +18,17 @@
           Capturar
         </button>
       </ion-item>
-      <ion-item class="item-icon-left">
-        <i class="icon">99</i>
-        <h2>12597</h2>
-        <p>Cinta para señalización</p>
+      <ion-item class="item item-divider">
+        Current Sale Products:
       </ion-item>
+      <ion-scroll>
+        <ion-item class="item-icon-left" ng-repeat="product in vm.sale.products">
+          <i class="icon">1</i>
+          <h2>{{product.sku}}</h2>
+          <p>{{product.description}}</p>
+          <p>{{product.price | currency}}</p>
+        </ion-item>
+      </ion-scroll>
     </ion-list>
   </ion-content>
 </ion-view>
