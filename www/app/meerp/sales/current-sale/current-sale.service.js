@@ -9,11 +9,24 @@
     var sale = {};
 
     return {
-      getClient: getClient
+      getClient: getClient,
+      setClient: setClient,
     };
 
+    /**
+     * Sets current sale's client
+     * @param client: object
+     */
+    function setClient(client) {
+      sale.client = client;
+    }
+
+    /**
+     * Gets current sale's client
+     * @returns {client: object}
+     */
     function getClient() {
-      return sale.client !== undefined;
+      return sale.client;
     }
 
   }

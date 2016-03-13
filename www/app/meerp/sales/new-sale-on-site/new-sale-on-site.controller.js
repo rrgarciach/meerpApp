@@ -10,6 +10,19 @@
 
     init(); // Initialize controller
 
+    /**
+     * Displays initial instructions alert.
+     */
+    function showAlert() {
+      $ionicPopup.alert({
+        title: 'Nueva Venta in situ',
+        template: 'Seleccione el cliente al cual visita.'
+      });
+    }
+
+    /**
+     * Initializes controller setups.
+     */
     function init() {
       vm.sale = {};
       vm.sale.client = currentSaleService.getClient();
@@ -19,13 +32,6 @@
         $location.path('app/clients/locate');
         showAlert();
       }
-    }
-
-    function showAlert() {
-      $ionicPopup.alert({
-        title: 'Nueva Venta in situ',
-        template: 'Seleccione el cliente al cual visita.'
-      });
     }
 
   }

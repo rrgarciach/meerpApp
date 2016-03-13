@@ -7,27 +7,41 @@
       [
         '$scope',
         '$ionicPopup',
+        '$ionicHistory',
         'mapsService',
         'clientsService',
+        'currentSaleService',
         LocateClientCtrl
       ]);
 
-  function LocateClientCtrl($scope, $ionicPopup, mapsService, clientsService) {
+  function LocateClientCtrl($scope,
+                            $ionicPopup,
+                            $ionicHistory,
+                            mapsService,
+                            clientsService,
+                            currentSaleService) {
     var vm = this;
 
-    init();
+    init(); // Initialize controller
 
+    /**
+     * Initialize google maps view.
+     */
     function initMap() {
       var map = mapsService.initMap( document.getElementById('map') );
       var clientLocation = clientsService.getClientByLocation();
-      mapsService.addMarker(map, clientLocation, showPopup);
+      mapsService.addMarker(map, clientLocation, retrieveClient);
     }
 
-    function showPopup() {
-      vm.data = {};
+    /**
+     * Displays client profile's popup with provided client data.
+     * @param clientData: object
+     */
+    function showClientPopup(clientData) {
+      $scope.client = clientData;
 
       // An elaborate, custom popup
-      $ionicPopup.show({
+      vm.clientPopup = $ionicPopup.show({
           templateUrl: '/app/meerp/clients/locate-client/client-profile-popup.html',
           title: 'Cliente',
           //subTitle: 'Cliente mayorista',
@@ -38,24 +52,34 @@
               text: '<b>Aceptar</b>',
               type: 'button-positive',
               onTap: function (e) {
-                e.preventDefault();
-                return $scope;
+                // e.preventDefault() will stop the popup from closing when tapped.
+                currentSaleService.setClient($scope.client);
+                $ionicHistory.goBack();
               }
             }
           ]
-        })
-        .then(function (res) {
-          console.log('Tapped!', res);
         });
-
-      //$timeout(function () {
-      //  myPopup.close(); //close the popup after 3 seconds for some reason
-      //}, 3000);
     }
 
+    /**
+     * Retrieves client data by given ID.
+     * @param id: integer
+     */
+    function retrieveClient(id) {
+      clientsService.getClientById(id)
+        .then(function (client) {
+          showClientPopup(client);
+        })
+        .catch(function (err) {
+          // Catch error
+        });
+    }
+
+    /**
+     * Initializes controller setups.
+     */
     function init() {
       initMap();
-
     }
   }
 
