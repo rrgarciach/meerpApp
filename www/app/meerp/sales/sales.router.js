@@ -16,11 +16,11 @@
           }
         })
         .state('app.sales:new:onsite', {
-          url: '/sales/new/onsite',
+          url: '/sales/new:onsite',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/sales/new-sale-on-site/new-sale-on-site.html',
-              controller: 'NewSaleOnSiteCtrl as vm',
+              templateUrl: '/app/meerp/sales/new-sale/new-sale.html',
+              controller: 'NewSaleCtrl as vm',
             }
           }
         });

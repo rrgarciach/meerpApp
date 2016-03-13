@@ -1,25 +1,34 @@
-<ion-view id="new-sale" view-title="Nueva Venta">
+<ion-view id="new-sale" view-title="Nueva Venta" cache-view="false">
   <ion-content>
     <a
         class="button button-positive button-full icon-left ion-location"
         ng-click="vm.locateClient()"
+        ng-if="!vm.sale.client"
     >
       Localizar Cliente
     </a>
     <ion-list>
       <ion-item class="item item-input-inset">
         <label class="item item-input item-input-wrapper">
-          <input type="number" placeholder="Capture código de producto">
+          <form ng-submit="vm.captureProduct()">
+            <input ng-model="vm.productCode" type="number" placeholder="Capture código de producto">
+          </form>
         </label>
         <button class="button">
-          Submit
+          Capturar
         </button>
       </ion-item>
-      <ion-item class="item-icon-left">
-        <i class="icon">99</i>
-        <h2>12597</h2>
-        <p>Cinta para señalización</p>
+      <ion-item class="item item-divider">
+        Current Sale Products:
       </ion-item>
+      <ion-scroll>
+        <ion-item class="item-icon-left" ng-repeat="product in vm.sale.products">
+          <i class="icon">1</i>
+          <h2>{{product.sku}}</h2>
+          <p>{{product.description}}</p>
+          <p>{{product.price | currency}}</p>
+        </ion-item>
+      </ion-scroll>
     </ion-list>
   </ion-content>
 </ion-view>
