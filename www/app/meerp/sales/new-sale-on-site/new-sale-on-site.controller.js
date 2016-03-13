@@ -8,7 +8,13 @@
   function NewSaleOnSiteCtrl($location, $ionicPopup, currentSaleService) {
     var vm = this;
 
+    vm.captureProduct = captureProduct;
+
     init(); // Initialize controller
+
+    function captureProduct() {
+
+    }
 
     /**
      * Displays initial instructions alert.
@@ -29,8 +35,8 @@
       // Check if current sale has not a client selected yet
       if (!vm.sale.client) {
         // Redirect to locate a client using map
-        $location.path('app/clients/locate');
-        showAlert();
+        //$location.path('app/clients/locate');
+        //showAlert();
       }
     }
 

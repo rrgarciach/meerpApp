@@ -10,10 +10,12 @@
     <ion-list>
       <ion-item class="item item-input-inset">
         <label class="item item-input item-input-wrapper">
-          <input type="number" placeholder="Capture código de producto">
+          <form ng-submit="vm.captureProduct()">
+            <input ng-model="vm.productCode" type="number" placeholder="Capture código de producto">
+          </form>
         </label>
         <button class="button">
-          Submit
+          Capturar
         </button>
       </ion-item>
       <ion-item class="item-icon-left">
