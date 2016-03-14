@@ -7,14 +7,14 @@
 
   function currentSaleService() {
     var sale = {
-      products: []
+      items: []
     };
 
     return {
       getClient: getClient,
       setClient: setClient,
-      setProduct: setProduct,
-      getProducts: getProducts,
+      setItem: setItem,
+      getItems: getItems,
     };
 
     /**
@@ -34,19 +34,19 @@
     }
 
     /**
-     * Sets a product into current sale
+     * Sets an item into current sale
      * @param product: object
      */
-    function setProduct(product) {
-      sale.products.push(product);
+    function setItem(product) {
+      sale.items.push(product);
     }
 
     /**
-     * Retrieves all products from current sale
-     * @returns {Array[product]}
+     * Retrieves all items from current sale
+     * @returns {Array[item]}
      */
-    function getProducts() {
-      return sale.products;
+    function getItems() {
+      return sale.items;
     }
 
   }
