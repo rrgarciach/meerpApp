@@ -114,9 +114,9 @@
       // Check if current sale has not a client selected yet
       if (!vm.sale.client && $stateParams.onsite) {
         // Redirect to locate a client using map
-        //$location.path('app/clients/locate');
+        $location.path('app/clients/locate');
         // Display instructions
-        //showAlertOnSiteInstructions();
+        showAlertOnSiteInstructions();
 
       } else if (vm.sale.client) { // If a client has already been selected
         // Get client required stock suggests from data mining service
