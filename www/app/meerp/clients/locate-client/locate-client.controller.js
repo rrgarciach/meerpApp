@@ -20,6 +20,7 @@
                             mapsService,
                             clientsService,
                             currentSaleService) {
+    // Controller as vm pattern
     var vm = this;
 
     init(); // Initialize controller
@@ -71,7 +72,7 @@
           showClientPopup(client);
         })
         .catch(function (err) {
-          // Catch error
+          errorService.handleError(err); // Catch error
         });
     }
 

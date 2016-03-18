@@ -8,8 +8,8 @@
   function productsService($q) {
     // Revealing module pattern:
     return {
-      getProductsBySKU: getProductsBySKU,
-      getProductsByEAN: getProductsByEAN,
+      getProductBySKU: getProductBySKU,
+      getProductByEAN: getProductByEAN,
     };
 
     /**
@@ -17,7 +17,7 @@
      * @param sku: integer
      * @returns {product}
      */
-    function getProductsBySKU(sku) {
+    function getProductBySKU(sku) {
       var deferred = $q.defer();
       /*
        This is a mocked method for prototype usage.
@@ -28,7 +28,7 @@
         sku: 12597,
         description: 'Cinta para señalización',
         price: 35.00,
-        brand: 'truper',
+        brand: 'Truper',
       };
       deferred.resolve(product);
 
@@ -40,7 +40,7 @@
      * @param ean: integer
      * @returns {product}
      */
-    function getProductsByEAN(ean) {
+    function getProductByEAN(ean) {
       var deferred = $q.defer();
       /*
        This is a mocked method for prototype usage.
@@ -51,7 +51,7 @@
         sku: 12597,
         description: 'Cinta para señalización',
         price: 35.00,
-        brand: 'truper',
+        brand: 'Truper',
       };
       deferred.resolve(product);
 
