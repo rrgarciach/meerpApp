@@ -10,7 +10,7 @@
           url: '/inventories/feed',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/inventories/feed/feed.html',
+              templateUrl: '/app/meerp/inventories/feed/inventories-feed.html',
               controller: 'InventoryFeedCtrl as vm',
             }
           }

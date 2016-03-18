@@ -6,11 +6,11 @@
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
 
-        .state('app.orders:view', {
-          url: '/orders/view',
+        .state('app.orders:viewr', {
+          url: '/orders/view/:orderId',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/orders/view/view.html',
+              templateUrl: '/app/meerp/orders/view/orders-view.html',
               controller: 'ViewOrderCtrl as vm',
             }
           }

@@ -5,7 +5,7 @@
     .module('app.meerp.orders')
     .service('ordersService', ordersService);
 
-  function ordersService() {
+  function ordersService($q) {
     // Revealing module pattern:
     return {
       getOrderById: getOrderById,
@@ -13,7 +13,7 @@
 
     /**
      * Retrieves a product by provided SKU
-     * @param sku: integer
+     * @param id: integer
      * @returns {product}
      */
     function getOrderById(id) {
@@ -24,9 +24,13 @@
        angular service to call a REST API resource.
        */
       var order = {
-        clientId: 123,
+        id: 1224,
         date: '12-12-2015',
         status: 1,
+        client: {
+          id: 123,
+          name: 'Juan Doe',
+        },
         items: [
           {
             sku: 12597,
@@ -44,7 +48,8 @@
           },
         ],
       };
-      deferred.resolve(product);
+
+      deferred.resolve(order);
 
       return deferred.promise;
     }

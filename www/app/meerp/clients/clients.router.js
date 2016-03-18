@@ -10,7 +10,7 @@
           url: '/clients/locate',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/clients/locate-client/locate-client.html',
+              templateUrl: '/app/meerp/clients/locate/locate-client.html',
               controller: 'LocateClientCtrl as vm',
             }
           }

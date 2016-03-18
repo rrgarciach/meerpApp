@@ -2,11 +2,17 @@
   <ion-content>
     <ion-list>
 
-      <ion-item>
-        Cliente:
-        <span class="item-note">
-          Juan Doe
-        </span>
+      <ion-item class="item item-divider">
+        No. Órden:<span class="item-note">{{vm.order.id}}</span>
+      </ion-item>
+      <ion-item class="item item-divider">
+        No. Cliente:<span class="item-note">{{vm.order.client.id}}</span>
+      </ion-item>
+      <ion-item class="item item-divider">
+        Cliente:<span class="item-note">{{vm.order.client.name}}</span>
+      </ion-item>
+      <ion-item class="item item-divider">
+        Fecha:<span class="item-note">{{vm.order.date | date}}</span>
       </ion-item>
 
       <ion-item class="item item-divider">
@@ -14,20 +20,25 @@
       </ion-item>
       <!--Starts list of captured products-->
       <ion-scroll>
-        <ion-item class="item-icon-left" ng-repeat="item in vm.sale.items">
+        <ion-item class="item-icon-left" ng-repeat="item in vm.order.items">
           <i class="icon">{{item.quantity}}</i>
           <h2>{{item.sku}}</h2>
           <p>{{item.description}}</p>
           <p>{{item.price | currency}}</p>
+          <p>Subtotal: {{item.price * item.quantity | currency}}</p>
         </ion-item>
       </ion-scroll>
       <!--Ends list of captured products-->
 
     </ion-list>
-    <a class="button button-positive button-full icon-left ion-location"
+    <a class="button button-positive button-full icon-left ion-compose"
        ng-click="vm.locateClient()"
        ng-if="!vm.sale.client">
-      Localizar Cliente
+      Editar Órden
+    </a>
+    <a class="button button-energized button-full icon-left ion-printer"
+       ng-if="!vm.sale.client">
+      Imprimir Órden
     </a>
   </ion-content>
 </ion-view>
