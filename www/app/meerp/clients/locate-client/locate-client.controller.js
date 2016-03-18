@@ -20,6 +20,7 @@
                             mapsService,
                             clientsService,
                             currentSaleService) {
+    // Controller as vm pattern
     var vm = this;
 
     init(); // Initialize controller
