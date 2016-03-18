@@ -1,17 +1,12 @@
-<ion-view id="new-sale" view-title="Nueva Venta" cache-view="false">
+<ion-view id="feed" view-title="Captura de Inventarios" cache-view="false">
   <ion-content>
-    <a class="button button-positive button-full icon-left ion-location"
-       ng-click="vm.locateClient()"
-       ng-if="!vm.sale.client">
-      Localizar Cliente
-    </a>
     <ion-list>
 
       <!--input and button form-->
       <ion-item class="item item-input-inset">
         <label class="item item-input item-input-wrapper">
           <form ng-submit="vm.captureProduct(vm.productCode)">
-            <input ng-model="vm.productCode" type="number" placeholder="Capture código de producto">
+            <input ng-model="vm.productCode" type="number" placeholder="Código de producto o EAN">
           </form>
         </label>
         <button class="button" ng-click="vm.captureProduct(vm.productCode)">
@@ -20,18 +15,22 @@
       </ion-item>
 
       <ion-item class="item item-divider">
-        Productos agregados:
+        Productos capturados:
       </ion-item>
       <!--Starts list of captured products-->
       <ion-scroll>
-        <ion-item class="item-icon-left" ng-repeat="item in vm.sale.items">
-          <i class="icon">{{item.quantity}}</i>
+        <ion-item class="item-icon-left" ng-repeat="item in vm.currentInventory">
+          <i class="icon">1</i>
           <h2>{{item.sku}}</h2>
           <p>{{item.description}}</p>
-          <p>{{item.price | currency}}</p>
         </ion-item>
       </ion-scroll>
       <!--Ends list of captured products-->
     </ion-list>
+    <a class="button button-positive button-full icon-left ion-checkmark"
+       ng-click="vm.locateClient()"
+       ng-disabled="vm.currentInventory < 1">
+      Finalizar Captura
+    </a>
   </ion-content>
 </ion-view>

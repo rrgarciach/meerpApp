@@ -123,6 +123,35 @@
     }
 
     /**
+     * Triggers client selection by current location
+     */
+    function getClientByLocation() {
+      // Redirect to locate a client using map
+      $location.path('app/clients/locate');
+      // Display instructions
+      showAlertOnSiteInstructions();
+    }
+
+    /**
+     * Gets client's sales related data
+     */
+    function getClientMetadata() {
+      // Get client required stock suggests from data mining service
+      dataMiningService.getClientReStock(vm.sale.client)
+        .then(function (products) {
+          // If suggested re-stock found, add them to current new sale
+          if (products.length > 0) {
+            products.forEach(function (item) {
+              addItem(item);
+            });
+          }
+        })
+        .catch(function (err) {
+          errorService.handleError(err); // Catch error
+        });
+    }
+
+    /**
      * Initializes controller setups.
      */
     function init() {
@@ -132,25 +161,10 @@
 
       // Check if current sale has not a client selected yet
       if (!vm.sale.client && $stateParams.onsite) { // If a client has NOT been selected yet
-        // Redirect to locate a client using map
-        $location.path('app/clients/locate');
-        // Display instructions
-        showAlertOnSiteInstructions();
+        getClientByLocation(); // Redirect to locate a client using map
 
       } else if (vm.sale.client) { // If a client has already been selected
-        // Get client required stock suggests from data mining service
-        dataMiningService.getClientReStock(vm.sale.client)
-          .then(function (products) {
-            // If suggested re-stock found, add them to current new sale
-            if (products.length > 0) {
-              products.forEach(function (item) {
-                addItem(item);
-              });
-            }
-          })
-          .then(function (err) {
-            errorService.handleError(err); // Catch error
-          })
+        getClientMetadata(); // Get client's sales related data
 
       }
 

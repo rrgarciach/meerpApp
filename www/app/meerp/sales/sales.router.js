@@ -10,16 +10,16 @@
           url: '/sales/new',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/sales/new-sale/new-sale.html',
+              templateUrl: '/app/meerp/sales/new/new-sale.html',
               controller: 'NewSaleCtrl as vm',
             }
           }
         })
         .state('app.sales:new:onsite', {
-          url: '/sales/new:onsite',
+          url: '/sales/new/:onsite',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/sales/new-sale/new-sale.html',
+              templateUrl: '/app/meerp/sales/new/new-sale.html',
               controller: 'NewSaleCtrl as vm',
             }
           }

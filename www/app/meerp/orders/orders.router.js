@@ -2,22 +2,22 @@
   'use strict';
 
   angular
-    .module('app.meerp.clients')
+    .module('app.meerp.orders')
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
 
-        .state('app.clients:locate', {
-          url: '/clients/locate',
+        .state('app.orders:viewr', {
+          url: '/orders/view/:orderId',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/clients/locate/locate-client.html',
-              controller: 'LocateClientCtrl as vm',
+              templateUrl: '/app/meerp/orders/view/orders-view.html',
+              controller: 'ViewOrderCtrl as vm',
             }
           }
         });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/clients/locate');
+      $urlRouterProvider.otherwise('/orders/view');
     });
 
 })();

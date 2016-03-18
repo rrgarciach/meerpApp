@@ -2,22 +2,22 @@
   'use strict';
 
   angular
-    .module('app.meerp.clients')
+    .module('app.meerp.inventories')
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
 
-        .state('app.clients:locate', {
-          url: '/clients/locate',
+        .state('app.inventories', {
+          url: '/inventories/feed',
           views: {
             'menuContent': {
-              templateUrl: '/app/meerp/clients/locate/locate-client.html',
-              controller: 'LocateClientCtrl as vm',
+              templateUrl: '/app/meerp/inventories/feed/inventories-feed.html',
+              controller: 'InventoryFeedCtrl as vm',
             }
           }
         });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/clients/locate');
+      $urlRouterProvider.otherwise('/inventories/feed');
     });
 
 })();

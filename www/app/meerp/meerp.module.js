@@ -8,6 +8,10 @@
       'app.meerp.products',
       'app.meerp.sales',
       'app.meerp.services',
+      'app.meerp.stores',
+      'app.meerp.inventories',
+      'app.meerp.orders',
+      'app.meerp.print',
     ]);
 
 })();
