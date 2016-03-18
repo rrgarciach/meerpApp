@@ -15,16 +15,17 @@
 
     // Controller as vm pattern
     var vm = this;
+    // Exposed methods:
     vm.captureProduct = captureProduct;
 
     init(); // Initialize controller
 
     /**
      * Captures new product
+     * @param productCode
      */
     function captureProduct(productCode) {
       // Check if provided code is SKU or EAN:
-
       if (productCode > 6) { // If code is EAN
         productsService.getProductByEAN(productCode)
           .then(function (product) {
@@ -44,20 +45,35 @@
       }
     }
 
+    /**
+     * Adds a new item to current sale
+     * @param product
+     */
     function addItem(product) {
-      showProductQuantityPopUp()
-        .then(function (qty) {
-          product.quantity = qty;
+      if (!product.quantity) {
+        showProductQuantityPopUp()
+          .then(function (qty) {
+            product.quantity = qty;
+            addItemQuantity(product);
+          });
+      } else {
+        addItemQuantity(product);
+      }
+    }
 
-          if (product.quantity > 0) {
-            // Persist products in current sale
-            currentSaleService.setItem(product);
-            // Also update controller's sale object
-            vm.sale.items = currentSaleService.getItems();
-            // Clear input value to be ready for next capture
-            vm.productCode = '';
-          }
-        });
+    /**
+     * Validates and add item quantity
+     * @param item
+     */
+    function addItemQuantity(item) {
+      if (item.quantity > 0) {
+        // Persist products in current sale
+        currentSaleService.setItem(item);
+        // Also update controller's sale object
+        vm.sale.items = currentSaleService.getItems();
+        // Clear input value to be ready for next capture
+        vm.productCode = '';
+      }
     }
 
     /**
@@ -76,7 +92,6 @@
       var qtyPopup = $ionicPopup.show({
         template: '<input type="text" ng-model="data.qty">',
         title: 'Cantidad',
-        //subTitle: 'Please use normal things',
         scope: $scope,
         buttons: [
           {
@@ -92,7 +107,7 @@
               if ($scope.data.qty > 0) {
                 return $scope.data.qty;
               }
-              //don't allow the user to close unless he enters wifi password
+              // don't allow the user to close unless he enters wifi password
               e.preventDefault();
             }
           }
@@ -112,7 +127,7 @@
       vm.sale.client = currentSaleService.getClient();
 
       // Check if current sale has not a client selected yet
-      if (!vm.sale.client && $stateParams.onsite) {
+      if (!vm.sale.client && $stateParams.onsite) { // If a client has NOT been selected yet
         // Redirect to locate a client using map
         $location.path('app/clients/locate');
         // Display instructions
@@ -125,7 +140,7 @@
             // If suggested re-stock found, add them to current new sale
             if (products.length > 0) {
               products.forEach(function (item) {
-                captureProduct.setItem(item);
+                addItem(item);
               });
             }
           })
