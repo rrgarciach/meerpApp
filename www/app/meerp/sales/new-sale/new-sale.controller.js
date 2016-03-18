@@ -66,6 +66,7 @@
      * @param item
      */
     function addItemQuantity(item) {
+      // Check if provided item has quantity:
       if (item.quantity > 0) {
         // Persist products in current sale
         currentSaleService.setItem(item);
@@ -74,6 +75,8 @@
         // Clear input value to be ready for next capture
         vm.productCode = '';
       }
+
+      // If item has no quantity, do nothing
     }
 
     /**
