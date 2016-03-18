@@ -5,26 +5,45 @@
     .module('app.meerp.print')
     .service('thermalPrintService', thermalPrintService);
 
-  function thermalPrintService() {
+  function thermalPrintService($q, $ionicPopup, bluetoothSerialService) {
     // Revealing module pattern:
     return {
-      print: print,
+      printOrder: printOrder,
     };
 
     /**
      * Retrieves a product by provided SKU
-     * @param data: Object
+     * @param data: Order
+     * @returns promise
      */
-    function print(data) {
+    function printOrder(data) {
       var deferred = $q.defer();
-      /*
-       This is a mocked method for prototype usage.
-       For real implementations it should use $http
-       angular service to call a REST API resource.
-       */
-      deferred.resolve(true);
+
+      bluetoothSerialService.sendData(data)
+        .then(function () {
+          showPrintSuccessPopUp(); // Display success popup
+          deferred.resolve(true);
+        })
+        .catch(function (err) {
+          deferred.reject(err);
+        });
+
 
       return deferred.promise;
+    }
+
+    /**
+     * Shows a print success popup
+     * @returns $ionicPopup
+     */
+    function showPrintSuccessPopUp() {
+      var printPopup = $ionicPopup.alert({
+        title: 'Impresión Térmica',
+        template: 'La solicitud de impresión has sido enviada exitosamente al dispositivo Impresión Térmica.'
+      });
+
+      return printPopup;
+
     }
 
   }

@@ -31,13 +31,11 @@
       <!--Ends list of captured products-->
 
     </ion-list>
-    <a class="button button-positive button-full icon-left ion-compose"
-       ng-click="vm.locateClient()"
-       ng-if="!vm.sale.client">
+    <a class="button button-positive button-full icon-left ion-compose">
       Editar Órden
     </a>
     <a class="button button-energized button-full icon-left ion-printer"
-       ng-if="!vm.sale.client">
+       ng-click="vm.printOrder()">
       Imprimir Órden
     </a>
   </ion-content>

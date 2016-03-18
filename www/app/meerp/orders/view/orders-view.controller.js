@@ -5,7 +5,10 @@
     .module('app.meerp.orders')
     .controller('ViewOrderCtrl', ViewOrderCtrl);
 
-  function ViewOrderCtrl($stateParams, errorService, ordersService) {
+  function ViewOrderCtrl($stateParams,
+                         errorService,
+                         ordersService,
+                         thermalPrintService) {
     // Controller as vm pattern
     var vm = this;
     vm.order = {};
@@ -17,19 +20,32 @@
     /**
      * Prints current order
      */
-    function printOrder() {}
+    function loadOrder() {
+      // Requests Order by provided ID
+      ordersService.getOrderById($stateParams.orderId)
+        .then(function (response) {
+          vm.order = response; // Binds order to current view
+        })
+        .catch(function (err) {
+          errorService.handleError(err); // Catch error
+        });
+    }
+
+    /**
+     * Prints current order
+     */
+    function printOrder() {
+      thermalPrintService.printOrder(vm.order)
+        .catch(function (err) {
+          errorService.handleError(err); // Catch error
+        });
+    }
 
     /**
      * Initializes controller setups.
      */
     function init() {
-      ordersService.getOrderById($stateParams.orderId)
-        .then(function (response) {
-          vm.order = response;
-        })
-        .catch(function (err) {
-          errorService.handleError(err); // Catch error
-        });
+      loadOrder();
     }
 
   }
