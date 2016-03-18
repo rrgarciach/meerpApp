@@ -71,7 +71,7 @@
           showClientPopup(client);
         })
         .catch(function (err) {
-          // Catch error
+          errorService.handleError(err); // Catch error
         });
     }
 

@@ -9,6 +9,7 @@
                        $location,
                        $ionicPopup,
                        $stateParams,
+                       errorService,
                        currentSaleService,
                        productsService,
                        dataMiningService) {
@@ -32,7 +33,7 @@
             addItem(product);
           })
           .catch(function (err) {
-            // Catch error
+            errorService.handleError(err); // Catch error
           });
       } else { // If code is SKU
         productsService.getProductBySKU(productCode)
@@ -40,7 +41,7 @@
             addItem(product);
           })
           .catch(function (err) {
-            // Catch error
+            errorService.handleError(err); // Catch error
           });
       }
     }
@@ -148,7 +149,7 @@
             }
           })
           .then(function (err) {
-            // Catch error
+            errorService.handleError(err); // Catch error
           })
 
       }
