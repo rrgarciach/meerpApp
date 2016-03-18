@@ -9,6 +9,9 @@ ESP esp(&Serial, &debugPort, 5); // ESP serial communication
 MQTT mqtt(&esp);
 boolean wifiConnected = false;
 
+/**
+* Callback to deal with WiFi connection
+*/
 void wifiCb(void* response)
 {
   uint32_t status;
@@ -29,6 +32,9 @@ void wifiCb(void* response)
   }
 }
 
+/**
+* Callback to deal with MQTT server when connected
+*/
 void mqttConnected(void* response)
 {
   debugPort.println("Connected");
@@ -38,11 +44,17 @@ void mqttConnected(void* response)
 
 }
 
+/**
+* Callback to deal with MQTT server when disconnection
+*/
 void mqttDisconnected(void* response)
 {
 	// What to do when disconnected.
 }
 
+/**
+* Callback to deal with MQTT server when data is received
+*/
 void mqttData(void* response)
 {
   // Parse response
@@ -62,11 +74,17 @@ void mqttData(void* response)
 
 }
 
+/**
+* Callback to deal with MQTT server when published a message
+*/
 void mqttPublished(void* response)
 {
 	// What to do when published.
 }
 
+/**
+* Setup before main loop begins
+*/
 void setup() {
   // Setup Serial sockets:
   Serial.begin(19200);
@@ -107,6 +125,9 @@ void setup() {
   debugPort.println("ARDUINO: system started");
 }
 
+/**
+* Main loop
+*/
 void loop() {
   esp.process();
   if(wifiConnected) {
