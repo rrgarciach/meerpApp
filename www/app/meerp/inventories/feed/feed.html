@@ -1,10 +1,5 @@
-<ion-view id="new-sale" view-title="Nueva Venta" cache-view="false">
+<ion-view id="new-sale" view-title="Captura de Inventarios" cache-view="false">
   <ion-content>
-    <a class="button button-positive button-full icon-left ion-location"
-       ng-click="vm.locateClient()"
-       ng-if="!vm.sale.client">
-      Localizar Cliente
-    </a>
     <ion-list>
 
       <!--input and button form-->
@@ -20,7 +15,7 @@
       </ion-item>
 
       <ion-item class="item item-divider">
-        Productos agregados:
+        Productos capturados:
       </ion-item>
       <!--Starts list of captured products-->
       <ion-scroll>
