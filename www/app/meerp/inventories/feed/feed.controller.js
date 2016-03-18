@@ -14,6 +14,7 @@
     // Controller as vm pattern
     var vm = this;
     vm.store = {};
+    vm.currentInventory = [];
 
     // Exposed methods:
     vm.captureProduct = captureProduct;
@@ -29,7 +30,7 @@
       if (productCode > 6) { // If code is EAN
         productsService.getProductByEAN(productCode)
           .then(function (product) {
-            currentInventoryFeedService.addStock(product.sku);
+            addStock(product);
           })
           .catch(function (err) {
             errorService.handleError(err); // Catch error
@@ -37,7 +38,7 @@
       } else { // If code is SKU
         productsService.getProductBySKU(productCode)
           .then(function (product) {
-            currentInventoryFeedService.addStock(product.sku);
+            addStock(product);
           })
           .catch(function (err) {
             errorService.handleError(err); // Catch error
@@ -45,6 +46,18 @@
       }
     }
 
+    /**
+     * Adds a new stock to current inventory being captured
+     * @param sku
+     */
+    function addStock(product) {
+      vm.currentInventory.push(product);
+      currentInventoryFeedService.addStock(product.sku);
+    }
+
+    /**
+     * Finishes de capture process and updates stores' database
+     */
     function finishCapture() {
       inventoriesService.updateInventories(vm.store.id);
     }

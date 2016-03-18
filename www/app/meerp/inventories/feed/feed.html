@@ -19,14 +19,18 @@
       </ion-item>
       <!--Starts list of captured products-->
       <ion-scroll>
-        <ion-item class="item-icon-left" ng-repeat="item in vm.sale.items">
-          <i class="icon">{{item.quantity}}</i>
+        <ion-item class="item-icon-left" ng-repeat="item in vm.currentInventory">
+          <i class="icon">1</i>
           <h2>{{item.sku}}</h2>
           <p>{{item.description}}</p>
-          <p>{{item.price | currency}}</p>
         </ion-item>
       </ion-scroll>
       <!--Ends list of captured products-->
     </ion-list>
+    <a class="button button-positive button-full icon-left ion-checkmark"
+       ng-click="vm.locateClient()"
+       ng-if="!vm.sale.client">
+      Finalizar Captura
+    </a>
   </ion-content>
 </ion-view>
