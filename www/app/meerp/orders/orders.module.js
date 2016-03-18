@@ -2,8 +2,6 @@
   'use strict';
 
   angular
-    .module('app.meerp.sales', [
-      'app.meerp.orders',
-    ]);
+    .module('app.meerp.orders', []);
 
 })();
