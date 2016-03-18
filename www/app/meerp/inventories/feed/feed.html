@@ -29,7 +29,7 @@
     </ion-list>
     <a class="button button-positive button-full icon-left ion-checkmark"
        ng-click="vm.locateClient()"
-       ng-if="!vm.sale.client">
+       ng-disabled="vm.currentInventory < 1">
       Finalizar Captura
     </a>
   </ion-content>

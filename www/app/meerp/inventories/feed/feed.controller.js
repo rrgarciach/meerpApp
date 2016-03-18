@@ -44,11 +44,12 @@
             errorService.handleError(err); // Catch error
           });
       }
+      vm.productCode = '';
     }
 
     /**
      * Adds a new stock to current inventory being captured
-     * @param sku
+     * @param product
      */
     function addStock(product) {
       vm.currentInventory.push(product);
