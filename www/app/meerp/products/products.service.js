@@ -3,7 +3,7 @@
 
   angular
     .module('app.meerp.products')
-    .service('productsService', ['$q', productsService]);
+    .service('productsService', productsService);
 
   function productsService($q) {
     // Revealing module pattern:

@@ -8,6 +8,7 @@
   function ViewOrderCtrl($stateParams,
                          errorService,
                          ordersService,
+                         productsService,
                          thermalPrintService) {
     // Controller as vm pattern
     var vm = this;
@@ -18,17 +19,33 @@
     init(); // Initialize controller
 
     /**
-     * Prints current order
+     * Load current order
      */
     function loadOrder() {
       // Requests Order by provided ID
       ordersService.getOrderById($stateParams.orderId)
-        .then(function (response) {
-          vm.order = response; // Binds order to current view
+        .then(function (order) {
+          vm.order = order; // Binds order to current view
+          loadProducts(); // Load current order's items
         })
         .catch(function (err) {
           errorService.handleError(err); // Catch error
         });
+    }
+
+    /**
+     * Load current order's items
+     */
+    function loadProducts() {
+      vm.order.items.forEach(function (item) {
+        productsService.getProductBySKU(item.sku)
+          .then(function (product) {
+            item.description = product.description; // Adds description to item
+          })
+          .catch(function (err) {
+            errorService.handleError(err); // Catch error
+          });
+      });
     }
 
     /**

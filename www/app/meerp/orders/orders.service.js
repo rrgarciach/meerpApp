@@ -35,16 +35,12 @@
           {
             sku: 12597,
             quantity: 12,
-            description: 'Cinta para señalización',
             price: 35.00,
-            brand: 'Truper',
           },
           {
             sku: 22606,
             quantity: 24,
-            description: 'Pinza para electricista',
             price: 23.00,
-            brand: 'Pretul',
           },
         ],
       };
