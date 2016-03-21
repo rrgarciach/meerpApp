@@ -3,7 +3,7 @@
 
   angular
     .module('app.meerp.clients')
-    .service('clientsService', ['$q', clientsService]);
+    .service('clientsService', clientsService);
 
   function clientsService($q) {
     // Revealing module pattern:
@@ -46,8 +46,7 @@
      * @returns {{position: google.maps.LatLng, id: number, name: string}}
      */
     function getClientByLocation(location) {
-      var location = {lat: 28.6625200, long: -106.1034899};
-      var myLatlng = new google.maps.LatLng(location.lat, location.long);
+      var myLatlng = new google.maps.LatLng(location.lat, location.lng);
       var clientLocation = {
         position: myLatlng,
         id: 123,

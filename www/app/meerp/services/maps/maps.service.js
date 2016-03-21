@@ -3,13 +3,14 @@
 
   angular
     .module('app.meerp.services')
-    .service('mapsService', [mapsService]);
+    .service('mapsService', mapsService);
 
-  function mapsService() {
+  function mapsService($q) {
     return {
       initMap: initMap,
+      getCurrentLocation: getCurrentLocation,
       addMarker: addMarker,
-    }
+    };
 
     function initMap(htmlMapElement) {
       var myLatlng = new google.maps.LatLng(28.6625306, -106.1033493);
@@ -31,6 +32,16 @@
       currentPosition.setMap(map);
 
       return map;
+    }
+
+    function getCurrentLocation() {
+      var deferred = $q.defer();
+
+      var pos = {lat: 28.6625200, lng: -106.1034899};
+
+      deferred.resolve(pos);
+
+      return deferred.promise;
     }
 
     function addMarker(map, clientLocation, clickAction) {

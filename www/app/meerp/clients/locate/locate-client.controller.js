@@ -3,16 +3,7 @@
 
   angular
     .module('app.meerp.clients')
-    .controller('LocateClientCtrl',
-      [
-        '$scope',
-        '$ionicPopup',
-        '$ionicHistory',
-        'mapsService',
-        'clientsService',
-        'currentSaleService',
-        LocateClientCtrl
-      ]);
+    .controller('LocateClientCtrl', LocateClientCtrl);
 
   function LocateClientCtrl($scope,
                             $ionicPopup,
@@ -30,8 +21,14 @@
      */
     function initMap() {
       var map = mapsService.initMap( document.getElementById('map') );
-      var clientLocation = clientsService.getClientByLocation();
-      mapsService.addMarker(map, clientLocation, retrieveClient);
+      //mapsService.getCurrentLocation()
+      //  .then(function (currentLocation) {
+      //    var clientLocation = clientsService.getClientByLocation(currentLocation);
+      //    mapsService.addMarker(map, clientLocation, retrieveClient);
+      //  })
+      //  .catch(function (err) {
+      //    errorService.handleError(err); // Catch error
+      //  });
     }
 
     /**
