@@ -60,7 +60,13 @@
      * Finishes de capture process and updates stores' database
      */
     function finishCapture() {
-      inventoriesService.updateInventories(vm.store.id);
+      inventoriesService.updateInventories(vm.store.id)
+        .then(function (response) {
+          // resolve
+        })
+        .catch(function (err) {
+          errorService.handleError(err); // Catch error
+        });
     }
 
     /**
