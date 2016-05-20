@@ -1,6 +1,8 @@
 # meerpApp
 Ionic (AngularJS) mobile application for master dissertation project MEERP (Mobile Environment for Enterprise Resource Planning)
 
+You can find the dissertation project's document [here](https://www.dropbox.com/s/ex3mlsqt2niv55w/EMERP_Abril-2016.pdf?dl=0). Right now it is in spanish but the translated english version is on the way.
+
 ## Installation
 - Install Ionic:
 
